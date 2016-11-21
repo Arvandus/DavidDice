@@ -22,7 +22,10 @@ function preload() {
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/DavidRun.png', 85, 100);
+<<<<<<< HEAD
 	game.load.image('Twenty','assets/Dice/D20.png');
+=======
+>>>>>>> origin/master
 
 }
 
@@ -39,6 +42,7 @@ function create() {
 
     //  A simple background for our game
     game.add.sprite(0, 0, 'sky');
+<<<<<<< HEAD
 	
 	//Add D20 to background
 	Dice = game.add.group();
@@ -46,6 +50,8 @@ function create() {
 	var DTwenty = Dice.create(game.world.width - 450, game.world.height - 500, 'Twenty');
 	DTwenty.width = 100;
 	DTwenty.height = 100;
+=======
+>>>>>>> origin/master
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
@@ -56,9 +62,14 @@ function create() {
     // Here we create the ground.
     //var ground = platforms.create(0, game.world.height - 64, 'ground');
 	
+<<<<<<< HEAD
 	//  Now let's create two ledges
     var ledge = platforms.create(-50, game.world.height - 32, 'ground');
 	//This stops it from falling away when you jump on it
+=======
+	    //  Now let's create two ledges
+    var ledge = platforms.create(-50, game.world.height - 32, 'ground');
+>>>>>>> origin/master
     ledge.body.immovable = true;
 
     ledge = platforms.create(450, game.world.height - 32, 'ground');
@@ -68,6 +79,7 @@ function create() {
     //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
     //ground.scale.setTo(2, 2);
 
+<<<<<<< HEAD
     //This stops it from falling away when you jump on it
 
 
@@ -75,6 +87,14 @@ function create() {
     player = game.add.sprite(100, game.world.height - 300, 'dude');
 	player.width = 63.5;
 	player.height = 75;
+=======
+    //  This stops it from falling away when you jump on it
+    //ground.body.immovable = true;
+
+    // The player and its settings
+    player = game.add.sprite(100, game.world.height - 300, 'dude');
+	player.width = 60;
+>>>>>>> origin/master
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
