@@ -22,22 +22,16 @@ function preload() {
     game.load.image('ground', 'assets/platform.png');
     game.load.image('star', 'assets/star.png');
     game.load.spritesheet('dude', 'assets/DavidRun.png', 85, 100);
-<<<<<<< HEAD
 	game.load.image('Twenty','assets/Dice/D20.png');
 	game.load.spritesheet('Numbers','assets/Numbers/Numbers.png',500, 500);
-=======
-<<<<<<< HEAD
-	game.load.image('Twenty','assets/Dice/D20.png');
-=======
->>>>>>> origin/master
->>>>>>> origin/master
+	//1create empty sprite for space. 
+	game.load.spritesheet('dude', 'assets/DavidRun.png',100,100);
 
 }
 
 var player;
 var platforms;
 var cursors;
-<<<<<<< HEAD
 var DTwenty;
 var stars;
 var fate;
@@ -57,58 +51,20 @@ function create() {
 	
 	//Add D20 to background
 	Dice = game.add.group();
-=======
-
-var stars;
-
-function create() {
-
-    //  We're going to be using physics, so enable the Arcade Physics system
-    game.physics.startSystem(Phaser.Physics.ARCADE);
-
-    //  A simple background for our game
-    game.add.sprite(0, 0, 'sky');
-<<<<<<< HEAD
-	
-	//Add D20 to background
-	Dice = game.add.group();
-	
-	var DTwenty = Dice.create(game.world.width - 450, game.world.height - 500, 'Twenty');
-	DTwenty.width = 100;
-	DTwenty.height = 100;
-=======
->>>>>>> origin/master
->>>>>>> origin/master
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = game.add.group();
 
     //  We will enable physics for any object that is created in this group
     platforms.enableBody = true;
-<<<<<<< HEAD
 	
 	//  Now let's create two ledges
     var ledge = platforms.create(-50, game.world.height - 32, 'ground');
 	//This stops it from falling away when you jump on it
-=======
-
-    // Here we create the ground.
-    //var ground = platforms.create(0, game.world.height - 64, 'ground');
-	
-<<<<<<< HEAD
-	//  Now let's create two ledges
-    var ledge = platforms.create(-50, game.world.height - 32, 'ground');
-	//This stops it from falling away when you jump on it
-=======
-	    //  Now let's create two ledges
-    var ledge = platforms.create(-50, game.world.height - 32, 'ground');
->>>>>>> origin/master
->>>>>>> origin/master
     ledge.body.immovable = true;
 
     ledge = platforms.create(450, game.world.height - 32, 'ground');
     ledge.body.immovable = true;
-<<<<<<< HEAD
 	
 	//Positioning of items.
 
@@ -116,37 +72,23 @@ function create() {
 	DTwenty = Dice.create(game.world.width - 450, game.world.height - 500, 'Twenty');
 	DTwenty.width = 100;
 	DTwenty.height = 100;
-=======
-
-
-    //  Scale it to fit the width of the game (the original sprite is 400x32 in size)
-    //ground.scale.setTo(2, 2);
-
-<<<<<<< HEAD
-    //This stops it from falling away when you jump on it
-
->>>>>>> origin/master
 
     // The player and its settings
     player = game.add.sprite(100, game.world.height - 300, 'dude');
 	player.width = 63.5;
 	player.height = 75;
-<<<<<<< HEAD
+	
+	//1 the empty space
+	TheSpace = game.add.sprite(350, game.world.height - 200, 'dude');
+	TheSpace = 63.5;
+	TheSpace = 75;
+	
+	TheSpace.enableBody = true;
 	
 	//Numbers Displayed on Dice
 	Numbers = game.add.sprite(game.world.width - 417, game.world.height - 465, 'Numbers');
 	Numbers.width = 30;
 	Numbers.height = 30;
-=======
-=======
-    //  This stops it from falling away when you jump on it
-    //ground.body.immovable = true;
-
-    // The player and its settings
-    player = game.add.sprite(100, game.world.height - 300, 'dude');
-	player.width = 60;
->>>>>>> origin/master
->>>>>>> origin/master
 
     //  We need to enable physics on the player
     game.physics.arcade.enable(player);
@@ -192,7 +134,6 @@ function update() {
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
-<<<<<<< HEAD
 	
 	//Dice randomizer
 	//While (fate === 0)
@@ -202,8 +143,6 @@ function update() {
 	//}
 	
 	//Player Actions
-=======
->>>>>>> origin/master
 
     //  Reset the players velocity (movement)
     player.body.velocity.x = 0;
@@ -229,21 +168,17 @@ function update() {
 
         player.frame = 0;
     }
-<<<<<<< HEAD
 	
-	//Dice Mechanics
-	//Numbers.animations.stop();
-    
-	//Numbers.frame = 0;
-	
-=======
-    
->>>>>>> origin/master
     //  Allow the player to jump if they are touching the ground.
     if (cursors.up.isDown && player.body.touching.down)
     {
         player.body.velocity.y = -250;
     }
+
+}
+
+//player hits space above hole
+function hitspace () {
 
 }
 
