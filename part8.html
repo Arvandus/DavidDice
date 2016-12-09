@@ -25,7 +25,7 @@ function preload() {
 	game.load.image('Twenty','assets/Dice/D20.png');
 	game.load.spritesheet('Numbers','assets/Numbers/Numbers.png',500, 500);
 	//1create empty sprite for space. 
-	game.load.spritesheet('dude', 'assets/DavidRun.png',100,100);
+	game.load.image('HitMe', 'assets/David_Hit.png');
 
 }
 
@@ -36,10 +36,11 @@ var DTwenty;
 var stars;
 var fate;
 var randomNumberBetween0and19;
+var emptyman;
 
 function create() {
 
-	fate = 0;
+	fate = true;
 
     //  We're going to be using physics, so enable the Arcade Physics system
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -79,11 +80,11 @@ function create() {
 	player.height = 75;
 	
 	//1 the empty space
-	TheSpace = game.add.sprite(350, game.world.height - 200, 'dude');
-	TheSpace = 63.5;
-	TheSpace = 75;
+	//TheSpace = game.add.sprite(350, game.world.height - 200, 'Emptyman');
+	//TheSpace = 63.5;
+	//TheSpace = 75;
 	
-	TheSpace.enableBody = true;
+	//TheSpace.enableBody = true;
 	
 	//Numbers Displayed on Dice
 	Numbers = game.add.sprite(game.world.width - 417, game.world.height - 465, 'Numbers');
@@ -104,9 +105,13 @@ function create() {
 
     //  Finally some stars to collect
     stars = game.add.group();
+	
+	emptyman = game.add.group();
 
     //  We will enable physics for any star that is created in this group
     stars.enableBody = true;
+	
+	emptyman.enableBody = true;
 
     //  Here we'll create 12 of them evenly spaced apart
     for (var i = 0; i < 12; i++)
@@ -120,6 +125,9 @@ function create() {
         //  This just gives each star a slightly random bounce value
         star.body.bounce.y = 0.7 + Math.random() * 0.2;
     }
+	
+	var emptymans = emptyman.create(350, game.world.height - 200, 'HitMe');
+	//var emptymans = emptyman.create(0, 0, 'HitMe');
 
     //  Our controls.
     cursors = game.input.keyboard.createCursorKeys();
@@ -135,12 +143,11 @@ function update() {
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     game.physics.arcade.overlap(player, stars, collectStar, null, this);
 	
+	// Checks to see if the player overlaps with the empty space
+	game.physics.arcade.overlap(player, emptyman, hitspace, null, this)
+	
 	//Dice randomizer
-	//While (fate === 0)
-	//{
-	randomNumberBetween0and19 = Math.floor(Math.random() * 20);
-	Numbers.frame = randomNumberBetween0and19;
-	//}
+     diceRandom(Numbers, fate);
 	
 	//Player Actions
 
@@ -178,8 +185,26 @@ function update() {
 }
 
 //player hits space above hole
-function hitspace () {
+function hitspace (player, emptyman) {
 
+//stops clock
+
+	//emptyman.kill();
+fate = false;
+return fate;
+
+}
+
+function diceRandom(Numbers, fate)
+{
+    if(fate){
+	randomNumberBetween0and19 = Math.floor(Math.random() * 20);
+	Numbers.frame = randomNumberBetween0and19;
+	return Numbers.frame;
+	}
+	else{
+	return;
+	}
 }
 
 function collectStar (player, star) {
